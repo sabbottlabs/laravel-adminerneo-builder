@@ -1,0 +1,5 @@
+output/*
+!output/.gitkeep
+!output/plugins/
+output/plugins/*
+!output/plugins/.gitkeep
