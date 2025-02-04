@@ -1,5 +1,3 @@
 build/*
 !build/.gitkeep
-!build/source/
-build/source/*
-!build/source/.gitkeep
+
