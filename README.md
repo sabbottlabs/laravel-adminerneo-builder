@@ -20,6 +20,7 @@ Handles compilation of AdminerNeo v5:
 
 ## Output
 - output/adminer.php - Compiled AdminerNeo
+- output/plugins/ - Plugins from AdminerNeo Source
 - output/version.txt - Build info
 - output/README.md - Documentation
 - output/LICENSE.md - License
