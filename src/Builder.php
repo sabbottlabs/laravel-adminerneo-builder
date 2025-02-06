@@ -162,10 +162,10 @@ class Builder
         // Copy main adminer file
         $this->execCommand("cp {$this->sourceDir}/export/adminer.php {$this->outputDir}/adminer.php", $output);
 
-        // // Copy plugins if they exist
-        // if (is_dir($this->sourceDir . '/plugins')) {
-        //     $this->execCommand("cp -r {$this->sourceDir}/plugins/* {$this->outputDir}/plugins/", $output);
-        // }
+        // Copy plugins if they exist
+        if (is_dir($this->sourceDir . '/plugins')) {
+            $this->execCommand("cp -r {$this->sourceDir}/plugins/* {$this->outputDir}/plugins/", $output);
+        }
 
         // Include License file
         $this->execCommand("cp {$this->sourceDir}/LICENSE.md {$this->outputDir}/LICENSE.md", $output);
