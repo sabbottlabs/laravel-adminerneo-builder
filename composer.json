@@ -2,7 +2,6 @@
     "name": "sabbottlabs/laravel-adminerneo-builder",
     "description": "Build tool for compiling AdminerNeo v5",
     "type": "library",
-    "version": "1.0.0",
     "license": ["Apache-2.0", "GPL-2.0-only"],
     "require": {
         "php": "^8.2",
