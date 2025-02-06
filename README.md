@@ -20,10 +20,11 @@ Handles compilation of AdminerNeo v5:
 
 ## Output
 - output/adminer.php - Compiled AdminerNeo
-- output/plugins/ - Plugins from AdminerNeo Source
 - output/version.txt - Build info
 - output/README.md - Documentation
 - output/LICENSE.md - License
+
+Note: Plugin feature is not being supported due to AdminerNeo current dev path.
 
 ## License
 Apache License 2.0 or GPL v2
