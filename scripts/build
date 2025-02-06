@@ -5,6 +5,16 @@ require __DIR__ . '/../src/Builder.php';
 
 use SabbottLabs\AdminerNeoBuilder\Builder;
 
+// Clean output directory
+$outputDir = __DIR__ . '/../output';
+if (is_dir($outputDir)) {
+    foreach (glob($outputDir . '/*') as $file) {
+        unlink($file);
+    }
+    rmdir($outputDir);
+}
+mkdir($outputDir, 0755, true);
+
 $config = require __DIR__ . '/../config/build.php';
 $builder = new Builder($config);
 
