@@ -3,6 +3,7 @@
     "description": "Build tool for compiling AdminerNeo v5",
     "type": "library",
     "license": ["Apache-2.0", "GPL-2.0-only"],
+    "version": "1.0.0",
     "require": {
         "php": "^8.2",
         "ext-pdo": "*"
