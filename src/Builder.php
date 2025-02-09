@@ -82,7 +82,9 @@ class Builder
             $this->execCommand("git clone {$this->config['source']['repo']} {$this->sourceDir}", $output);
             $this->execCommand("cd {$this->sourceDir} && git checkout {$this->branch}", $output);
         } else {
-            $this->execCommand("cd {$this->sourceDir} && git fetch && git checkout {$this->branch} && git pull", $output);
+            // Force clean state
+            $this->execCommand("cd {$this->sourceDir} && git fetch && git reset --hard HEAD && git clean -fd", $output);
+            $this->execCommand("cd {$this->sourceDir} && git checkout {$this->branch} && git reset --hard upstream/{$this->branch}", $output);
         }
         $this->buildInfo['clone_output'] = $output;
     }
@@ -156,23 +158,33 @@ class Builder
         if (!file_exists($this->sourceDir . '/export/adminer.php')) {
             throw new RuntimeException('No compiled file found');
         }
-
+    
         $output = [];
-
+    
+        // Create output directory structure
+        if (!is_dir($this->outputDir)) {
+            mkdir($this->outputDir, 0755, true);
+        }
+    
         // Copy main adminer file
         $this->execCommand("cp {$this->sourceDir}/export/adminer.php {$this->outputDir}/adminer.php", $output);
-
-        // Copy plugins if they exist
+    
+        // Handle plugins directory
         if (is_dir($this->sourceDir . '/plugins')) {
-            $this->execCommand("cp -r {$this->sourceDir}/plugins/* {$this->outputDir}/plugins/", $output);
+            $pluginsDir = $this->outputDir . '/plugins';
+            if (!is_dir($pluginsDir)) {
+                mkdir($pluginsDir, 0755, true);
+            }
+            $this->execCommand("cp -r {$this->sourceDir}/plugins/* {$pluginsDir}/", $output);
         }
-
-        // Include License file
-        $this->execCommand("cp {$this->sourceDir}/LICENSE.md {$this->outputDir}/LICENSE.md", $output);
-
-        // Include README file
-        $this->execCommand("cp {$this->sourceDir}/README.md {$this->outputDir}/README.md", $output);
-
+    
+        // Copy documentation files
+        foreach (['LICENSE.md', 'README.md'] as $file) {
+            if (file_exists("{$this->sourceDir}/{$file}")) {
+                $this->execCommand("cp {$this->sourceDir}/{$file} {$this->outputDir}/{$file}", $output);
+            }
+        }
+    
         $this->buildInfo['move_output'] = $output;
     }
 
